@@ -5,6 +5,10 @@
   import Alert from '../components/animals/Alert.svelte';
   import { API_BASE_URL } from '../config/config.js';
 
+  console.log('VITE_API_BASE_URL:', import.meta.env.VITE_API_BASE_URL);
+  console.log('VITE_APP_TITLE:', import.meta.env.VITE_APP_TITLE);
+
+
   let showModal = false; // Controla si el modal de creación está abierto
   let alertMessage = ''; // Mensaje de alerta
   let animals = []; // Lista de animales compartida entre los componentes
