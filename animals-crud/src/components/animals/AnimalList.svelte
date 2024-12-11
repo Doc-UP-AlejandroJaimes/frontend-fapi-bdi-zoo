@@ -19,20 +19,21 @@
   let alertTimeout;
 
   async function loadAnimals() {
-    if (animals.length === 0) {
-      // Solo carga si no se pasan datos desde el padre
-      isLoading = true;
-      error = null;
-      try {
-        const data = await fetchAnimals(currentPage, pageSize);
-        animals = data.results;
-        totalAnimals = data.total;
-      } catch (err) {
-        error = 'Failed to load animals';
-        console.error(err);
-      } finally {
-        isLoading = false;
-      }
+    isLoading = true;
+    error = null;
+    try {
+      const data = await fetchAnimals(currentPage, pageSize);
+
+      console.log(`Page: ${currentPage}, Page Size: ${pageSize}`);
+      //console.log("Data Fetched:", JSON.stringify(data, null, 2));
+
+      animals = data.results;
+      totalAnimals = data.total;
+    } catch (err) {
+      error = 'Error al cargar los animales';
+      console.error(err);
+    } finally {
+      isLoading = false;
     }
   }
 
@@ -130,11 +131,8 @@
 
   <!-- Paginación -->
   <Pagination
-    currentPage={currentPage}
+    {currentPage}
     totalPages={Math.ceil(totalAnimals / pageSize)}
-    onPrevious={() => currentPage > 1 && changePage(currentPage - 1)}
-    onNext={() =>
-      currentPage < Math.ceil(totalAnimals / pageSize) && changePage(currentPage + 1)
-    }
+    onPageChange={changePage}
   />
 </div>

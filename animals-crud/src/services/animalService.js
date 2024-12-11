@@ -7,7 +7,7 @@ export async function fetchAnimals(page = 1, pageSize = 10) {
 }
 
 export async function fetchAnimalDetail(id) {
-  const response = await fetch(`${API_BASE_URL}/animales/${id}/`);
+  const response = await fetch(`${API_BASE_URL}/animales/${id}`);
   const data = await response.json();
   return data;
 }
@@ -25,7 +25,15 @@ export async function createAnimal(animal) {
 }
 
 export async function deleteAnimal(id) {
-  const response = await fetch(`${API_BASE_URL}/animales/${id}/`, { method: 'DELETE' });
+  console.log('deleteAnimal', id);
+  const response = await fetch(`${API_BASE_URL}/animales/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+
+  console.log(response.json());
   if (!response.ok) {
     throw new Error('Error deleting animal');
   }

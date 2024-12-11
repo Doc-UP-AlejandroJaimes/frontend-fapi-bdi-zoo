@@ -1,8 +1,9 @@
-import preprocess from 'svelte-preprocess';
+import adapter from '@sveltejs/adapter-vercel';
 
-/** @type {import('svelte').Config} */
-const config = {
-  preprocess: preprocess(), // Utilizamos la exportación por defecto
+export default {
+	kit: {
+		adapter: adapter({
+			// see below for options that can be set here
+		})
+	}
 };
-
-export default config;
